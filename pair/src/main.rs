@@ -13,16 +13,17 @@ use rand_core::OsRng;
 
 fn main() {
     let rng = &mut rand::thread_rng();
-
+  //generate private key 
     let a = Fr::random(rng);
     let b = Fr::random(rng);
     let c = Fr::random(rng);
 
-
+ //public key
     let (pa,qa) = (G1::one()*a,G2::one()*a);
     let (pb,qb) = (G1::one()*b,G2::one()*b);
     let (pc,qc) = (G1::one()*c,G2::one()*c);
 
+    //get shared secret 
 
     let alice_ss = pairing(pb,qc).pow(a);
     let bob_ss = pairing(pb, qb).pow(b);
