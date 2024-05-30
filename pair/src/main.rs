@@ -5,14 +5,13 @@ extern crate rand;
 use bn::{pairing, Fr, G1, G2};
 use crate::bn::Group;
 
-use rand_core::OsRng;
 
 
 
 
 
 fn main() {
-    let rng = &mut rand::thread_rng();
+    let rng = &mut  rand::thread_rng();
   //generate private key 
     let a = Fr::random(rng);
     let b = Fr::random(rng);
@@ -26,15 +25,15 @@ fn main() {
     //get shared secret 
 
     let alice_ss = pairing(pb,qc).pow(a);
-    let bob_ss = pairing(pb, qb).pow(b);
-    let ron_ss = pairing(pc, qc).pow(c);
+    let bob_ss = pairing(pc, qa).pow(b);
+    let ron_ss = pairing(pa, qb).pow(c);
 
 
     if alice_ss == bob_ss && bob_ss == ron_ss {
-        println!("\nSharing has worked!");
+        println!("sharing has worked!");
     }
     else {
-       println!("\nSharing has failed!");
+       println!("sharing has failed!");
     }
    }
     
